@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  web:
+    container_name: busbookingConatiner
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresqldb
+    networks:
+      - springboot-postgres-net
+
+  postgresqldb:
+    image: postgres:14-alpine
+    container_name: postgresqldb
+    ports:
+      - "5000:5432"
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=Pavan6458@
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=busbookingbackend
+    networks:
+      - springboot-postgres-net
+
+networks:
+  springboot-postgres-net:
